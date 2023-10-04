@@ -18,12 +18,13 @@ def do_deploy(archive_path):
         put(archive_path, "/tmp/")
         file_name = os.path.basename(archive_path)
         release = "/data/web_static/releases/{}".format(file_name[:-4])
-        run("sudo mkdir -p {}".format(release))
-        run("tar -xz -f /tmp/{} -C {}".format(file_name, release))
+        run("rm -rf {}".format(release))
+        run("mkdir -p {}".format(release))
+        run("tar -xzf /tmp/{} -C {}".format(file_name, release))
         run("rm /tmp/{}".format(file_name))
-        run('mv {}/web_static/* {}/'.format(release, release))
+        run("mv {}/web_static/* {}/".format(release, release))
         run("rm -rf {}/web_static/".format(release))
-        run("rm -rf /data/web_static/current")
+        run("rm -rf data/web_static/current")
         run("ln -sf {} {}".format(release, "/data/web_static/current"))
     except Exception:
         return False
