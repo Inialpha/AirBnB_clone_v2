@@ -5,10 +5,10 @@ from fabric.api import local, put, run, env
 from datetime import datetime
 import os.path
 
-
 env.hosts = ["100.27.3.38", "52.87.212.15"]
 env.user = "ubuntu"
 env.key_filename = "~/.ssh/id_rsa"
+
 
 def do_pack():
     """generates a .tgx file"""
