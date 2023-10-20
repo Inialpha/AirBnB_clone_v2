@@ -3,6 +3,9 @@
 import json
 from models.state import State
 from models.place import Place
+from models.city import City
+from models.user import User
+from models.amenity import Amenity
 
 
 class FileStorage:
@@ -70,3 +73,7 @@ class FileStorage:
                 del FileStorage.__objects[key]
             except KeyError:
                 pass
+
+    def close(self):
+        """call reload for deserializing json file into object"""
+        self.reload()
