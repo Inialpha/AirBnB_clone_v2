@@ -52,8 +52,12 @@ class DBStorage:
                  }
         obj_dict = {}
         if cls:
+            if not isinstance(cls, str):
+                for key, value in classes.items():
+                    if value == cls:
+                        cls == key
             name = modules[__name__]
-            cls = getattr(name, cls)
+            cls = getattr(name, cls.__name__)
             result = self.__session.query(cls).all()
         else:
             result = []
@@ -95,3 +99,7 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         self.__session = scoped_session(session)
+
+    def close(self):
+        """close sessions"""
+        self.__session.remove()
