@@ -11,7 +11,7 @@ app = Flask(__name__)
 def filters():
     """list all the states or cities by states in the database"""
     states = storage.all(State)
-    amenities = storage.all(State)
+    amenities = storage.all(Amenity)
     return (render_template('10-hbnb_filters.html', states=states, amenities=amenities))
 
 
