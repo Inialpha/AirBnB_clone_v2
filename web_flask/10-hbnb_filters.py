@@ -10,8 +10,9 @@ app = Flask(__name__)
 @app.route('/hbnb_filters', strict_slashes=False)
 def filters():
     """list all the states or cities by states in the database"""
-
-    return (render_template('10-hbnb_filters.html'))
+    states = storage.all(State)
+    amenities = storage.all(State)
+    return (render_template('10-hbnb_filters.html', states=states, amenities=amenities))
 
 
 @app.teardown_appcontext
